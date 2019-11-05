@@ -22,9 +22,6 @@ public class Cv {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "photo_url")
-	private String photoUrl;
-	
 	@Column(name = "profession")
 	private String profession;
 	
@@ -60,13 +57,7 @@ public class Cv {
 		this.id = id;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
-	}
-
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
-	}
+	
 
 	public String getProfession() {
 		return profession;
@@ -126,7 +117,7 @@ public class Cv {
 
 	@Override
 	public String toString() {
-		return "Cv [id=" + id + ", photoUrl=" + photoUrl + ", profession=" + profession
+		return "Cv [id=" + id + ", profession=" + profession
 				+ ", overview=" + overview + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", phone=" + phone + ", birthDate=" + birthDate + "]";
 	}
