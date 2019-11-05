@@ -23,14 +23,6 @@ public class CrmUser {
 	@Size(min = 1, message = "is required")
 	private String matchingPassword;
 
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
-	private String firstName;
-
-	@NotNull(message = "is required")
-	@Size(min = 1, message = "is required")
-	private String lastName;
-
 	@ValidEmail
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -62,22 +54,6 @@ public class CrmUser {
 
 	public void setMatchingPassword(String matchingPassword) {
 		this.matchingPassword = matchingPassword;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmail() {

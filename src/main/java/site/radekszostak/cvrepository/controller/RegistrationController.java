@@ -69,8 +69,10 @@ public class RegistrationController {
         	return "registration-form";
         }
         
-        // create user account        						
+        // create user account 
+      
         userService.save(theCrmUser);
+        
         
         logger.info("Successfully created user: " + userName);
         

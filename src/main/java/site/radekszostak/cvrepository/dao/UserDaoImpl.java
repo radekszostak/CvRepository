@@ -17,6 +17,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findByUserName(String theUserName) {
+		
 		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 

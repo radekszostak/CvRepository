@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import site.radekszostak.cvrepository.dao.RoleDao;
 import site.radekszostak.cvrepository.dao.UserDao;
+import site.radekszostak.cvrepository.entity.Cv;
 import site.radekszostak.cvrepository.entity.Role;
 import site.radekszostak.cvrepository.entity.User;
 import site.radekszostak.cvrepository.user.CrmUser;
@@ -46,13 +47,12 @@ public class UserServiceImpl implements UserService {
 		 // assign user details to the user object
 		user.setUserName(crmUser.getUserName());
 		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
-		user.setFirstName(crmUser.getFirstName());
-		user.setLastName(crmUser.getLastName());
 		user.setEmail(crmUser.getEmail());
 
 		// give user default role of "user"
 		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
-
+		// set default empty cv
+		user.setCv(new Cv());
 		 // save user in the database
 		userDao.save(user);
 	}

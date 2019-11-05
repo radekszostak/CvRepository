@@ -12,79 +12,46 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
 public class User {
-		
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cv_id")
+	private Cv cv;
+
 	@Column(name = "username")
 	private String userName;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "email")
 	private String email;
-	
-	@Column(name = "first_name")
-	private String firstName;
-	
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Column(name = "phone")
-	private String phone;
-	
-	@Column(name = "birth_date")
-	private String birthDate;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", 
-	joinColumns = @JoinColumn(name = "user_id"), 
-	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Collection<Role> roles;
-	
+
 	public User() {
 	}
 
-	public User(String userName, String password, String email, String firstName, String lastName, String phone,
-			String birthDate) {
+	public User(Long id, Cv cv, String userName, String password, String email, Collection<Role> roles) {
+		super();
+		this.id = id;
+		this.cv = cv;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.birthDate = birthDate;
-	}
-
-	public User(String userName, String password, String email, String firstName, String lastName, String phone,
-			String birthDate, Collection<Role> roles) {
-		this.userName = userName;
-		this.password = password;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.birthDate = birthDate;
 		this.roles = roles;
-	}
-
-	public User(String userName, String password, Collection<Role> roles) {
-		this.userName = userName;
-		this.password = password;
-		this.roles = roles;
-	}
-	
-	public User(String userName, String password) {
-		this.userName = userName;
-		this.password = password;
 	}
 
 	public Long getId() {
@@ -93,6 +60,14 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Cv getCv() {
+		return cv;
+	}
+
+	public void setCv(Cv cv) {
+		this.cv = cv;
 	}
 
 	public String getUserName() {
@@ -119,38 +94,6 @@ public class User {
 		this.email = email;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
-	}
-
 	public Collection<Role> getRoles() {
 		return roles;
 	}
@@ -161,9 +104,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", birthDate="
-				+ birthDate + "]";
+		return "User [id=" + id + ", cv=" + cv + ", userName=" + userName + ", password=" + password + ", email="
+				+ email + ", roles=" + roles + "]";
 	}
 	
 	
