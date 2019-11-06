@@ -13,8 +13,6 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-
 @Entity
 @Table(name = "cv")
 public class Cv {
