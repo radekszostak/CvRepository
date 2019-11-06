@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<body>
+	<header th:fragment="header">
+
+		<span sec:authorize="isAuthenticated()" class="float-right">
+			Logged in as <span sec:authentication="name"></span> | <a
+			href="javascript: document.logoutForm.submit()" role="menuitem">
+				Logout</a>
+			<form name="logoutForm" th:action="@{/logout}" method="post"
+				th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />
+			</form>
+		</span> <span sec:authorize="isAnonymous()" class="float-right"> Not
+			logged in | <a th:href="@{/showMyLoginPage}">Login</a>
+		</span> <br>
+		<h1 class="text-center">Resume Repository</h1>
+		<nav>
+			<a th:href="@{/}">Browse</a>
+			<a th:href="@{/viewMyCv}">My Resume</a>
+		</nav>
+	</header>
+
+	<footer> </footer>
+</body>
+</html>

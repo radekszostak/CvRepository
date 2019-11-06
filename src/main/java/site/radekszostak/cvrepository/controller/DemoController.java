@@ -45,8 +45,15 @@ public class DemoController {
 		theModel.addAttribute("cvs", theCvs);
 		return "home";
 	}
-
-	@GetMapping("/myCv")
+	
+	@GetMapping("/viewMyCv")
+	public String viewMyCv(Model theModel, Principal thePrincipal) {
+		System.out.println("===> username: " + thePrincipal.getName());
+		User theUser = userService.findByUserName(thePrincipal.getName());
+		
+		return "redirect:/showCv?id="+theUser.getCv().getId();
+	}
+	@GetMapping("/editMyCv")
 	public String editCv(Model theModel, Principal thePrincipal) {
 		System.out.println("===> username: " + thePrincipal.getName());
 		User theUser = userService.findByUserName(thePrincipal.getName());
@@ -62,7 +69,7 @@ public class DemoController {
 		
 		System.out.println("===> Cv is publish: " + theCv.isPublish());
 		cvService.save(theCv);
-		return "redirect:/myCv";
+		return "redirect:/viewMyCv";
 	}
 	
 	@PostMapping("/uploadPhoto")
@@ -74,7 +81,7 @@ public class DemoController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/myCv";
+		return "redirect:/editMyCv";
 	}
     @GetMapping(value ="/img/user/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
@@ -85,8 +92,11 @@ public class DemoController {
     }
     
     @GetMapping("/showCv")
-    public String showCv(@RequestParam("id") int cvId, Model theModel) {
+    public String showCv(@RequestParam("id") int cvId, Model theModel, Principal thePrincipal) {
     	theModel.addAttribute("cv", cvService.findById(cvId));
+  	
+    	theModel.addAttribute("loggedUser", userService.findByUserName(thePrincipal.getName()));
+    	
     	return "cv-view";
     }
 

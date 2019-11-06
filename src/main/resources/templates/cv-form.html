@@ -23,40 +23,10 @@
 
 <body>
 	<div class="container">
-		<header class="py3">
-			<h2>luv2code Company Home Page</h2>
-		</header>
-		<p>Welcome to the luv2code company home page!</p>
 
-		<div sec:authorize="isAuthenticated()">
-			<a href="javascript: document.logoutForm.submit()" role="menuitem">
-				Logout</a>
-			<form name="logoutForm" th:action="@{/logout}" method="post"
-				th:hidden="true">
-				<input hidden="true" type="submit" value="Sign Out" />
-			</form>
-
-			<a th:href="@{/myCv}">My Resume</a>
-		</div>
-		<div sec:authorize="isAnonymous()">
-			<a th:href="@{/showMyLoginPage}">Login</a>
-
-		</div>
+		<div th:insert="fragments :: header"></div>
 		<hr>
 
-		<!-- display user name and role -->
-
-		<div sec:authorize="isAuthenticated()">
-			User: <span sec:authentication="name"></span> <br> <br>
-			Role(s): <span sec:authentication="principal.authorities"></span> <br>
-			<br>
-		</div>
-		<div>
-			<!-- Check for login error -->
-			<div th:if="${session.user}">
-				<p th:text="'Email: ' + ${session.user.email}"></p>
-			</div>
-		</div>
 		<img th:src="|@{/img/user/}*{cv.id}.jpg|" />
 		<!-- Photo upload section -->
 		<form method="POST" enctype="multipart/form-data"
@@ -77,11 +47,11 @@
 		<!-- CV edit section -->
 		<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
 			<input type="hidden" th:field="*{id}" /> <input type="checkbox"
-				name="publish" th:field="*{publish}" value="publish">Public<br> <input
-				type="text" th:field="*{firstName}" placeholder="first name" /> <input
-				type="text" th:field="*{lastName}" placeholder="last name" /> <input
-				type="text" th:field="*{profession}" placeholder="profession" /> <input
-				type="date" th:field="*{birthDate}" /> <input type="text"
+				name="publish" th:field="*{publish}" value="publish">Public<br>
+			<input type="text" th:field="*{firstName}" placeholder="first name" />
+			<input type="text" th:field="*{lastName}" placeholder="last name" />
+			<input type="text" th:field="*{profession}" placeholder="profession" />
+			<input type="date" th:field="*{birthDate}" /> <input type="text"
 				th:field="*{email}" placeholder="email" /> <input type="text"
 				th:field="*{phone}" placeholder="phone number" /> <input
 				type="text" th:field="*{overview}" placeholder="overview" /><input

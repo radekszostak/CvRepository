@@ -23,40 +23,13 @@
 
 <body>
 	<div class="container">
-		<header class="py3">
-			<h2>luv2code Company Home Page</h2>
-		</header>
-		<p>Welcome to the luv2code company home page!</p>
-
-		<div sec:authorize="isAuthenticated()">
-			<a href="javascript: document.logoutForm.submit()" role="menuitem">
-				Logout</a>
-			<form name="logoutForm" th:action="@{/logout}" method="post"
-				th:hidden="true">
-				<input hidden="true" type="submit" value="Sign Out" />
-			</form>
-
-			<a th:href="@{/myCv}">My Resume</a>
-		</div>
-		<div sec:authorize="isAnonymous()">
-			<a th:href="@{/showMyLoginPage}">Login</a>
-
-		</div>
+<div th:insert="fragments :: header">
+	</div>
 		<hr>
-
-		<!-- display user name and role -->
-
-		<div sec:authorize="isAuthenticated()">
-			User: <span sec:authentication="name"></span> <br> <br>
-			Role(s): <span sec:authentication="principal.authorities"></span> <br>
-			<br>
-		</div>
-		<div>
-			<!-- Check for login error -->
-			<div th:if="${session.user}">
-				<p th:text="'Email: ' + ${session.user.email}"></p>
-			</div>
-		</div>
+		<span th:if="*{loggedUser.cv.id} == *{cv.id}">
+			<a th:href="@{editMyCv}">Edit</a>
+		</span>
+		<br>
 		<img th:src="|@{/img/user/}*{cv.id}.jpg|" />
 
 		<p th:text="*{cv.firstName}"></p>

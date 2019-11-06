@@ -23,48 +23,19 @@
 
 <body>
 	<div class="container">
-		<header class="py3">
-			<h2>luv2code Company Home Page</h2>
-		</header>
-		<p>Welcome to the luv2code company home page!</p>
+	
+	<div th:insert="fragments :: header">
+	</div>
 
-		<div sec:authorize="isAuthenticated()">
-			<a href="javascript: document.logoutForm.submit()" role="menuitem">
-				Logout</a>
-			<form name="logoutForm" th:action="@{/logout}" method="post"
-				th:hidden="true">
-				<input hidden="true" type="submit" value="Sign Out" />
-			</form>
-
-			<a th:href="@{/myCv}">My Resume</a>
-		</div>
-		<div sec:authorize="isAnonymous()">
-			<a th:href="@{/showMyLoginPage}">Login</a>
-
-		</div>
 		<hr>
-
-		<!-- display user name and role -->
-
-		<div sec:authorize="isAuthenticated()">
-			User: <span sec:authentication="name"></span> <br> <br>
-			Role(s): <span sec:authentication="principal.authorities"></span> <br>
-			<br>
-		</div>
-		<div>
-			<!-- Check for login error -->
-			<div th:if="${session.user}">
-				<p th:text="'Email: ' + ${session.user.email}"></p>
-			</div>
-		</div>
 
 		<!--
 		PLACEHOLDERRRRRRRRRRRR
 		-->
 
-		<div class="row" th:each="tempCv: ${cvs}">
+		<div class="row">
 
-			<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="col-xs-12 col-sm-6 col-md-4" th:each="tempCv: ${cvs}">
 				<div class="card">
 					<div class="card-body text-center">
 						<p>
