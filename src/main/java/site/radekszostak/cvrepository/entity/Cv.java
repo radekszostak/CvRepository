@@ -48,8 +48,20 @@ public class Cv {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 	
+	@Column(name = "experience")
+	private String experience;
+	
+	@Column(name = "skill")
+	private String skill;
+	
+	@Column(name = "education")
+	private String education;
+	
+	@Column(name = "interest")
+	private String interest;
+	
 	public Cv() {
-		firstName = "";
+		
 	}
 
 	public int getId() {
@@ -126,11 +138,44 @@ public class Cv {
 		this.publish = publish;
 	}
 
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
+	}
+
 	@Override
 	public String toString() {
 		return "Cv [id=" + id + ", publish=" + publish + ", profession=" + profession + ", overview=" + overview
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone
-				+ ", birthDate=" + birthDate + "]";
+				+ ", birthDate=" + birthDate + ", experience=" + experience + ", skill=" + skill + ", education="
+				+ education + ", interest=" + interest + "]";
 	}
 
 
