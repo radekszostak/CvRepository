@@ -13,6 +13,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 @Entity
 @Table(name = "cv")
 public class Cv {
@@ -21,6 +23,9 @@ public class Cv {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
+	@Column(name = "publish")
+	private boolean publish;
 	
 	@Column(name = "profession")
 	private String profession;
@@ -115,11 +120,19 @@ public class Cv {
 		this.birthDate = birthDate;
 	}
 
+	public boolean isPublish() {
+		return publish;
+	}
+
+	public void setPublish(boolean publish) {
+		this.publish = publish;
+	}
+
 	@Override
 	public String toString() {
-		return "Cv [id=" + id + ", profession=" + profession
-				+ ", overview=" + overview + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phone=" + phone + ", birthDate=" + birthDate + "]";
+		return "Cv [id=" + id + ", publish=" + publish + ", profession=" + profession + ", overview=" + overview
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone
+				+ ", birthDate=" + birthDate + "]";
 	}
 
 

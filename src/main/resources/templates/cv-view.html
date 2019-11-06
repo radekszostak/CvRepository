@@ -58,43 +58,14 @@
 			</div>
 		</div>
 		<img th:src="|@{/img/user/}*{cv.id}.jpg|" />
-		<!-- Photo upload section -->
-		<form method="POST" enctype="multipart/form-data"
-			th:action="@{/uploadPhoto}">
-			<input type="hidden" name="cvId" th:value="*{cv.id}" />
-			<table>
-				<tr>
-					<td>File to upload:</td>
-					<td><input type="file" name="photo" /></td>
 
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Upload" /></td>
-				</tr>
-			</table>
-		</form>
-		<!-- CV edit section -->
-		<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
-			<input type="hidden" th:field="*{id}" /> <input type="checkbox"
-				name="publish" th:field="*{publish}" value="publish">Public<br> <input
-				type="text" th:field="*{firstName}" placeholder="first name" /> <input
-				type="text" th:field="*{lastName}" placeholder="last name" /> <input
-				type="text" th:field="*{profession}" placeholder="profession" /> <input
-				type="date" th:field="*{birthDate}" /> <input type="text"
-				th:field="*{email}" placeholder="email" /> <input type="text"
-				th:field="*{phone}" placeholder="phone number" /> <input
-				type="text" th:field="*{overview}" placeholder="overview" />
-			<button type="submit">Submit</button>
-
-
-		</form>
-
-
-
-
-
-
+		<p th:text="*{cv.firstName}"></p>
+		<p th:text="*{cv.lastName}"></p>
+		<p th:text="*{cv.profession}"></p>
+		<p th:text="*{cv.birthDate}"></p>
+		<p th:text="*{cv.email}"></p>
+		<p th:text="*{cv.phone}"></p>
+		<p th:text="*{cv.overview}"></p>
 
 
 	</div>

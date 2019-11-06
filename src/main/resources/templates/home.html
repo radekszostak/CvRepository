@@ -35,7 +35,7 @@
 				th:hidden="true">
 				<input hidden="true" type="submit" value="Sign Out" />
 			</form>
-			
+
 			<a th:href="@{/myCv}">My Resume</a>
 		</div>
 		<div sec:authorize="isAnonymous()">
@@ -54,99 +54,33 @@
 		<div>
 			<!-- Check for login error -->
 			<div th:if="${session.user}">
-				<p
-					th:text="'Email: ' + ${session.user.email}"></p>
+				<p th:text="'Email: ' + ${session.user.email}"></p>
 			</div>
 		</div>
 
 		<!--
 		PLACEHOLDERRRRRRRRRRRR
 		-->
-		<div class="row">
+
+		<div class="row" th:each="tempCv: ${cvs}">
+
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<div class="card">
 					<div class="card-body text-center">
 						<p>
-							<img class=" img-fluid"
-								src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
+							<img class=" img-fluid" th:src="|@{img/user}/${tempCv.id}.jpg|"
 								alt="card image">
 						</p>
-						<h4 class="card-title">Sunlimetech</h4>
-						<p class="card-text">This is basic card with image on top,
-							title, description and button.</p>
-						<a href="#" class="btn btn-primary btn-sm"><i
-							class="fa fa-plus"></i></a>
+						<h4 class="card-title"
+							th:text="|${tempCv.firstName} ${tempCv.lastName}"></h4>
+						<p class="card-text" th:text="${tempCv.profession}"></p>
+						<a th:href="|@{/showCv}?id=${tempCv.id}|" class="btn btn-primary btn-sm"><i
+							class="fa fa-plus">Details</i></a>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<div class="card">
-					<div class="card-body text-center">
-						<p>
-							<img class=" img-fluid"
-								src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-								alt="card image">
-						</p>
-						<h4 class="card-title">Sunlimetech</h4>
-						<p class="card-text">This is basic card with image on top,
-							title, description and button.</p>
-						<a href="#" class="btn btn-primary btn-sm"><i
-							class="fa fa-plus"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<div class="card">
-					<div class="card-body text-center">
-						<p>
-							<img class=" img-fluid"
-								src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-								alt="card image">
-						</p>
-						<h4 class="card-title">Sunlimetech</h4>
-						<p class="card-text">This is basic card with image on top,
-							title, description and button.</p>
-						<a href="#" class="btn btn-primary btn-sm"><i
-							class="fa fa-plus"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<div class="card">
-					<div class="card-body text-center">
-						<p>
-							<img class=" img-fluid"
-								src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-								alt="card image">
-						</p>
-						<h4 class="card-title">Sunlimetech</h4>
-						<p class="card-text">This is basic card with image on top,
-							title, description and button.</p>
-						<a href="#" class="btn btn-primary btn-sm"><i
-							class="fa fa-plus"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-4">
-				<div class="card">
-					<div class="card-body text-center">
-						<p>
-							<img class=" img-fluid"
-								src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png"
-								alt="card image">
-						</p>
-						<h4 class="card-title">Sunlimetech</h4>
-						<p class="card-text">This is basic card with image on top,
-							title, description and button.</p>
-						<a href="#" class="btn btn-primary btn-sm"><i
-							class="fa fa-plus"></i></a>
-					</div>
-				</div>
-			</div>
+
 		</div>
-
-
-
 
 	</div>
 </body>

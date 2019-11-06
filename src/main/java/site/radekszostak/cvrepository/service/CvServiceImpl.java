@@ -41,4 +41,16 @@ public class CvServiceImpl implements CvService {
 
 	}
 
+	@Override
+	public List<Cv> findAllPublic() {
+		return cvDao.findAllPublic();
+		
+	}
+
+	@Override
+	public Cv findById(int cvId) {
+		
+		return cvDao.findById(cvId);
+	}
+
 }

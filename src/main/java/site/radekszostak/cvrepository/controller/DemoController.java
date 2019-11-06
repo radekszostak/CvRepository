@@ -1,7 +1,7 @@
 package site.radekszostak.cvrepository.controller;
 
 import java.security.Principal;
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,8 +39,10 @@ public class DemoController {
 	private PhotoService photoService;
 	
 	@GetMapping("/")
-	public String showHome() {
-		
+	public String showHome(Model theModel) {
+		List<Cv> theCvs = cvService.findAllPublic();
+		System.out.println("===> theCvs: " + theCvs);
+		theModel.addAttribute("cvs", theCvs);
 		return "home";
 	}
 
@@ -57,20 +59,18 @@ public class DemoController {
 	
 	@PostMapping("/saveCv")
 	public String saveCv(@ModelAttribute("cv") Cv theCv, Model theModel) {
+		
+		System.out.println("===> Cv is publish: " + theCv.isPublish());
 		cvService.save(theCv);
 		return "redirect:/myCv";
 	}
 	
 	@PostMapping("/uploadPhoto")
-	public String uploadPhoto(@RequestParam("photo") MultipartFile file, Principal thePrincipal, HttpServletRequest request) {
-		
-		//Assign new username based file name
-		
-		file.getName().replace(file.getOriginalFilename(), thePrincipal.getName().concat(".jpg"));
+	public String uploadPhoto(@RequestParam("cvId") String cvId, @RequestParam("photo") MultipartFile file, HttpServletRequest request) {
+		System.out.println("===> cvId: " + cvId);
 		try {
-			photoService.store(file.getBytes(), thePrincipal.getName().concat(".jpg"));
+			photoService.store(file.getBytes(), cvId.concat(".jpg"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -82,6 +82,12 @@ public class DemoController {
     	
         byte [] file = photoService.load(filename);
         return file;
+    }
+    
+    @GetMapping("/showCv")
+    public String showCv(@RequestParam("id") int cvId, Model theModel) {
+    	theModel.addAttribute("cv", cvService.findById(cvId));
+    	return "cv-view";
     }
 
 	
