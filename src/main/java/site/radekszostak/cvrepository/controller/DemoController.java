@@ -28,31 +28,32 @@ import site.radekszostak.cvrepository.service.UserService;
 
 @Controller
 public class DemoController {
-	
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private CvService cvService;
-	
+
 	@Autowired
 	private PhotoService photoService;
-	
+
 	@GetMapping("/")
 	public String showHome(Model theModel) {
 		List<Cv> theCvs = cvService.findAllPublic();
 		System.out.println("===> theCvs: " + theCvs);
 		theModel.addAttribute("cvs", theCvs);
-		return "home";
+		return "browse";
 	}
-	
+
 	@GetMapping("/viewMyCv")
 	public String viewMyCv(Model theModel, Principal thePrincipal) {
 		System.out.println("===> username: " + thePrincipal.getName());
 		User theUser = userService.findByUserName(thePrincipal.getName());
-		
-		return "redirect:/showCv?id="+theUser.getCv().getId();
+
+		return "redirect:/showCv?id=" + theUser.getCv().getId();
 	}
+
 	@GetMapping("/editMyCv")
 	public String editCv(Model theModel, Principal thePrincipal) {
 		System.out.println("===> username: " + thePrincipal.getName());
@@ -63,54 +64,45 @@ public class DemoController {
 		theModel.addAttribute("cv", theCv);
 		return "cv-form";
 	}
-	
+
 	@PostMapping("/saveCv")
 	public String saveCv(@ModelAttribute("cv") Cv theCv, Model theModel) {
-		
+
 		System.out.println("===> Cv is publish: " + theCv.isPublish());
 		cvService.save(theCv);
-		return "redirect:/viewMyCv";
+		return "cv-form";
 	}
-	
+
 	@PostMapping("/uploadPhoto")
-	public String uploadPhoto(@RequestParam("cvId") String cvId, @RequestParam("photo") MultipartFile file, HttpServletRequest request) {
+	public String uploadPhoto(@RequestParam("cvId") String cvId, @RequestParam("photo") MultipartFile file,
+			HttpServletRequest request) {
 		System.out.println("===> cvId: " + cvId);
 		try {
 			photoService.store(file.getBytes(), cvId.concat(".jpg"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return "redirect:/editMyCv";
 	}
-    @GetMapping(value ="/img/user/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
-    @ResponseBody
-    public byte[] serveFile(@PathVariable String filename) {
-    	
-        byte [] file = photoService.load(filename);
-        return file;
-    }
-    
-    @GetMapping("/showCv")
-    public String showCv(@RequestParam("id") int cvId, Model theModel, Principal thePrincipal) {
-    	theModel.addAttribute("cv", cvService.findById(cvId));
-  	
-    	theModel.addAttribute("loggedUser", userService.findByUserName(thePrincipal.getName()));
-    	
-    	return "cv-view";
-    }
 
-	
+	@GetMapping(value = "/img/user/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] serveFile(@PathVariable String filename) {
 
-	
+		byte[] file = photoService.load(filename);
+		return file;
+	}
+
+	@GetMapping("/showCv")
+	public String showCv(@RequestParam("id") int cvId, Model theModel, Principal thePrincipal) {
+		theModel.addAttribute("cv", cvService.findById(cvId));
+		System.out.println("===> thePrincipal: " + thePrincipal);
+		if (thePrincipal != null) {
+			User theUser = userService.findByUserName(thePrincipal.getName());
+			theModel.addAttribute("loggedUser", theUser);
+		}
+		return "cv-view";
+	}
+
 }
-
-
-
-
-
-
-
-
-
-

@@ -10,5 +10,4 @@ public class CvrepositoryApplication {
         SpringApplication.run(CvrepositoryApplication.class, args);
 
 	}
-
 }

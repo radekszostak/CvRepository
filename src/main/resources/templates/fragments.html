@@ -1,28 +1,112 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head th:fragment="head">
+<title>Resume Repository</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/filebrowse.css}">
+<!-- Reference Bootstrap files -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous"
+>
+<link rel="stylesheet" th:href="@{/css/narrow.css}">
 
+
+</head>
 <body>
 	<header th:fragment="header">
 
-		<span sec:authorize="isAuthenticated()" class="float-right">
-			Logged in as <span sec:authentication="name"></span> | <a
-			href="javascript: document.logoutForm.submit()" role="menuitem">
-				Logout</a>
-			<form name="logoutForm" th:action="@{/logout}" method="post"
-				th:hidden="true">
+		<span sec:authorize="isAuthenticated()" class="float-right"> Logged in as <span
+			sec:authentication="name"
+		></span> | <a href="javascript: document.logoutForm.submit()" role="menuitem" class="text-info"> Logout</a>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
 				<input hidden="true" type="submit" value="Sign Out" />
 			</form>
-		</span> <span sec:authorize="isAnonymous()" class="float-right"> Not
-			logged in | <a th:href="@{/showMyLoginPage}">Login</a>
+		</span> <span sec:authorize="isAnonymous()" class="float-right"> Not logged in | <a class="text-info"
+			th:href="@{/login}"
+		>Login</a> | <a class="text-info"
+			th:href="@{/register/showRegistrationForm}"
+		>Sign up</a>
 		</span> <br>
-		<h1 class="text-center">Resume Repository</h1>
-		<nav>
-			<a th:href="@{/}">Browse</a>
-			<a th:href="@{/viewMyCv}">My Resume</a>
+		<div class="">
+			<h1 class="text-center">Resume Repository</h1>
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link" th:href="@{/}">Browse</a> <a class="nav-item nav-link"
+						th:href="@{/viewMyCv}"
+					>My Resume</a>
+				</div>
+			</div>
 		</nav>
+
+		<div class="form-group">
+			<div class="col-xs-15">
+				<div>
+
+					<!-- Check for logout -->
+					<div th:if="${param.loggedout}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">You
+						have been logged out.</div>
+					
+					<!-- Check for logout -->
+					<div th:if="${param.accessdenied}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">You have to login to access this page.</div>
+
+<!-- Check for login error -->																	
+									<div th:if="${param.loginerror}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">
+										Invalid username and password.
+									</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
 	</header>
 
-	<footer> </footer>
+	<footer th:fragment="footer">
+		<div class="container mt-4 ">
+		
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-6">
+				<hr class="mb-2">
+					<h5>Contact</h5>
+					<ul class="list-unstyled">
+						<li><i class="fa fa-linkedin-square"></i> <a class="text-info" href="https://www.linkedin.com/in/rados%C5%82aw-szostak/">Radosław Szostak</a></li>
+						<li><i class="fa fa-envelope-o"></i> <a class="text-info" href="mailto:radoslawszostak@gmail.com">radoslawszostak@gmail.com</a></li>
+						<li><i class="fa fa-phone"></i> +48 794 625 183</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+
+	</footer>
 </body>
 </html>

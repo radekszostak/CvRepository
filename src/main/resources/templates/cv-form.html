@@ -1,77 +1,127 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 
-<head>
-<title>luv2code Company Home Page</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Reference Bootstrap files -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<head th:include="fragments :: head"></head>
 
 <body>
 	<div class="container">
 
 		<div th:insert="fragments :: header"></div>
-		<hr>
+		<div class="container border shadow px-md-5 py-4">
+			
+			<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
+				<input type="hidden" th:field="*{id}" />
 
-		<img th:src="|@{/img/user/}*{cv.id}.jpg|" />
-		<!-- Photo upload section -->
-		<form method="POST" enctype="multipart/form-data"
-			th:action="@{/uploadPhoto}">
-			<input type="hidden" name="cvId" th:value="*{cv.id}" />
-			<table>
-				<tr>
-					<td>File to upload:</td>
-					<td><input type="file" name="photo" /></td>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<h5>Publication in repository</h5>
+							<input id="publish" class="" type="checkbox" name="publish" th:field="*{publish}"
+								value="publish"
+							><label class="form-check-label ml-2" for="publish">Show my Resume in repository</label>
+						</div>
+					</div>
+				</div>
+				<h5>Main informations</h5>
 
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Upload" /></td>
-				</tr>
-			</table>
-		</form>
-		<!-- CV edit section -->
-		<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
-			<input type="hidden" th:field="*{id}" /> <input type="checkbox"
-				name="publish" th:field="*{publish}" value="publish">Public<br>
-			<input type="text" th:field="*{firstName}" placeholder="first name" />
-			<input type="text" th:field="*{lastName}" placeholder="last name" />
-			<input type="text" th:field="*{profession}" placeholder="profession" />
-			<input type="date" th:field="*{birthDate}" /> <input type="text"
-				th:field="*{email}" placeholder="email" /> <input type="text"
-				th:field="*{phone}" placeholder="phone number" /> <input
-				type="text" th:field="*{overview}" placeholder="overview" /><input
-				type="text" th:field="*{experience}" placeholder="experience" /><input
-				type="text" th:field="*{skill}" placeholder="skill" /><input
-				type="text" th:field="*{education}" placeholder="education" /><input
-				type="text" th:field="*{interest}" placeholder="interest" />
-			<button type="submit">Submit</button>
+				<div class="row">
+					<div class="col-sm-6">
+						<label class="mb-0" for="firstName">First name</label> <input id="firstName"
+							class="form-control form-control-sm" type="text" th:field="*{firstName}"
+							/> <label class="mb-0" for="lastName">Last name</label> <input id="lastName"
+							class="form-control form-control-sm" type="text" th:field="*{lastName}"
+							
+						/> <label class="mb-0" for="profession">Profession</label> <input id="profession"
+							class="form-control form-control-sm" type="text" th:field="*{profession}"
+							
+						/>
+					</div>
 
+					<div class="col-sm-6">
 
-		</form>
-
-
-
-
-
+						<label class="mb-0" for="birthDate">Birth date</label> <input id="birthDate"
+							class="form-control form-control-sm" type="date" th:field="*{birthDate}"
+						/> <label class="mb-0" for="email">Email</label> <input id="email"
+							class="form-control form-control-sm" type="email" th:field="*{email}" 
+						/> <label class="mb-0" for="phone">Phone number</label> <input id="phone"
+							class="form-control form-control-sm" type="text" th:field="*{phone}"
+							
+						/>
+					</div>
 
 
 
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<label class="mb-0" for="overview">Overview</label>
+						<textarea id="overview" class="form-control form-control-sm" type="text"
+							th:field="*{overview}" 
+						></textarea>
+						<label class="mb-0" for="experience">Experience</label>
+						<textarea id="experience" class="form-control form-control-sm" type="text"
+							th:field="*{experience}" 
+						></textarea>
+						<label class="mb-0" for="skill">Skills</label>
+						<textarea id="skill" class="form-control form-control-sm" type="text" th:field="*{skill}"
+							
+						></textarea>
+						<label class="mb-0" for="education">Education</label>
+						<textarea id="education" class="form-control form-control-sm" type="text"
+							th:field="*{education}" 
+						></textarea>
+						<label class="mb-0" for="interest">Interest</label>
+						<textarea id="interest" class="form-control form-control-sm" type="text"
+							th:field="*{interest}" 
+						></textarea>
+
+						<button class="btn btn-info mt-3" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group mt-4">
+						<h5>Photo</h5>
+						<img class="img-fluid mb-2 img-thumbnail" th:src="|@{/img/user/}*{cv.id}.jpg|" />
+						<form method="POST" enctype="multipart/form-data" th:action="@{/uploadPhoto}">
+							<input type="hidden" name="cvId" th:value="*{cv.id}" />
+
+
+
+							<div class="input-group">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="theInputFile" name="photo"
+										aria-describedby="inputGroupFileAddon04"
+									> <label class="custom-file-label" for="theInputFile">Choose file</label>
+								</div>
+								<div class="input-group-append">
+									<button class="btn btn-info" type="submit" id="inputGroupFileAddon04">Upload</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		
+		</div>
 	</div>
+
+	<footer th:include="fragments :: footer"></footer>
+
+	<script>
+		$('#theInputFile').on('change', function() {
+
+			//get the file name
+			var fileName = $(this).val();
+			//replace the "Choose a file" label
+			var fileName = fileName.replace('C:\\fakepath\\', " ");
+			$(this).next('.custom-file-label').html(fileName);
+		})
+	</script>
 </body>
 
 </html>
