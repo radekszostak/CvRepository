@@ -9,8 +9,13 @@
 
 	<div class="container">
 		<div th:insert="fragments :: header"></div>
-		<div class="container border shadow px-sm-5 py-4">
-			<div class="row">
+		<div class="container border shadow px-sm-5 pb-4 pt-3">
+		<a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
+		
+		<code>> User authentication and access control is handled by Spring Security framework.</code>"
+		
+		><i class="fa fa-terminal"></i></a> 
+			<div class="row pt-3">
 				<div class="col-sm-6 pr-sm-4 pr-md-5">
 				<h4>Login</h4>
 					<!-- Login Form -->
@@ -38,10 +43,11 @@
 					</form>
 					
 				</div>
+				
 				<div class="col-sm-6 pl-sm-5">
 						<h4>Sign up</h4>
-						Don't have account?<br>
-						<a th:href="@{/register/showRegistrationForm}" class="btn btn-info btn-sm mt-1" role="button"
+						<div class="pt-sm-4">Don't have account?</div>
+						<a th:href="@{/register/showRegistrationForm}" class="btn btn-info btn-sm mt-1 " role="button"
 							aria-pressed="true"
 						>Sign up</a>
 					</div>

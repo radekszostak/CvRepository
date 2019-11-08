@@ -79,12 +79,15 @@
 
 						<button class="btn btn-info mt-3" type="submit">Submit</button>
 					</div>
+					
 				</div>
 			</form>
+			
 		<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group mt-4">
-						<h5>Photo</h5>
+						<h5>Photo </h5>
+						
 						<img class="img-fluid mb-2 img-thumbnail" th:src="|@{/img/user/}*{cv.id}.jpg|" />
 						<form method="POST" enctype="multipart/form-data" th:action="@{/uploadPhoto}">
 							<input type="hidden" name="cvId" th:value="*{cv.id}" />
@@ -97,14 +100,20 @@
 										aria-describedby="inputGroupFileAddon04"
 									> <label class="custom-file-label" for="theInputFile">Choose file</label>
 								</div>
+								<br>
 								<div class="input-group-append">
 									<button class="btn btn-info" type="submit" id="inputGroupFileAddon04">Upload</button>
 								</div>
 							</div>
 						</form>
-
+<a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
+		
+		<code>> Photo will be resized and cropped by back-end logic in order to save server space.</code>"
+		
+		><i class="fa fa-terminal"></i></a> 
 					</div>
 				</div>
+			
 			</div>
 		
 		</div>

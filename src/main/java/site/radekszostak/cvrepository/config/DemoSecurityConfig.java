@@ -54,6 +54,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/login").permitAll()
 			.antMatchers("/showCv").permitAll()
 			.antMatchers("/css/*").permitAll()
+			.antMatchers("/script/*").permitAll()
 			.antMatchers("/**").hasRole("USER")
 			.and()
 			.formLogin().loginPage("/login").loginProcessingUrl("/authenticateTheUser")
