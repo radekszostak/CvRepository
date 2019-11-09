@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import site.radekszostak.cvrepository.dao.CvDao;
-import site.radekszostak.cvrepository.dao.UserDao;
 import site.radekszostak.cvrepository.entity.Cv;
 
 @Service

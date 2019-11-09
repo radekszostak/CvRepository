@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import site.radekszostak.cvrepository.entity.Cv;
-import site.radekszostak.cvrepository.entity.Role;
-import site.radekszostak.cvrepository.entity.User;
 
 @Repository
 public class CvDaoImpl implements CvDao {
