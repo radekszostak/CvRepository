@@ -39,7 +39,7 @@
 
 		<!-- Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -63,7 +63,14 @@
 
 					<!-- Check for login error -->
 					<div th:if="${param.loginerror}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Invalid username and password.</div>
-
+					
+					<!-- Check for login error -->
+					<div th:if="${param.imageSuccess}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Image uploaded successfully.</div>
+					
+					<!-- Check for login error -->
+					<div th:if="${param.imageTypeError}" class="alert alert-danger col-xs-offset-1 col-xs-10 mt-3">Uploaded file is not jpg/jpeg image.</div>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -84,9 +91,7 @@
 				
 					<h5>Source</h5>
 					<ul class="list-unstyled">
-						
 						<li><i class="fa fa-github-square"></i> Web page sources available on <a class="text-info" href="https://github.com/shocik/CvRepository">GitHub</a></li>
-						
 					</ul>
 				 </div>
 				<div class="col-sm-6">

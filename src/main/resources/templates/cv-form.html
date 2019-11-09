@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:include="fragments :: head"></head>
 
@@ -9,8 +7,11 @@
 	<div class="container">
 
 		<div th:insert="fragments :: header"></div>
+
+
+
 		<div class="container border shadow px-md-5 py-4">
-			
+
 			<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
 				<input type="hidden" th:field="*{id}" />
 
@@ -18,9 +19,7 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<h5>Publication in repository</h5>
-							<input id="publish" class="" type="checkbox" name="publish" th:field="*{publish}"
-								value="publish"
-							><label class="form-check-label ml-2" for="publish">Show my Resume in repository</label>
+							<input id="publish" class="" type="checkbox" name="publish" th:field="*{publish}" value="publish"><label class="form-check-label ml-2" for="publish">Show my Resume in repository</label>
 						</div>
 					</div>
 				</div>
@@ -28,27 +27,12 @@
 
 				<div class="row">
 					<div class="col-sm-6">
-						<label class="mb-0" for="firstName">First name</label> <input id="firstName"
-							class="form-control form-control-sm" type="text" th:field="*{firstName}"
-							/> <label class="mb-0" for="lastName">Last name</label> <input id="lastName"
-							class="form-control form-control-sm" type="text" th:field="*{lastName}"
-							
-						/> <label class="mb-0" for="profession">Profession</label> <input id="profession"
-							class="form-control form-control-sm" type="text" th:field="*{profession}"
-							
-						/>
+						<label class="mb-0" for="firstName">First name</label> <input id="firstName" class="form-control form-control-sm" type="text" th:field="*{firstName}" /> <label class="mb-0" for="lastName">Last name</label> <input id="lastName" class="form-control form-control-sm" type="text" th:field="*{lastName}" /> <label class="mb-0" for="profession">Profession</label> <input id="profession" class="form-control form-control-sm" type="text" th:field="*{profession}" />
 					</div>
 
 					<div class="col-sm-6">
 
-						<label class="mb-0" for="birthDate">Birth date</label> <input id="birthDate"
-							class="form-control form-control-sm" type="date" th:field="*{birthDate}"
-						/> <label class="mb-0" for="email">Email</label> <input id="email"
-							class="form-control form-control-sm" type="email" th:field="*{email}" 
-						/> <label class="mb-0" for="phone">Phone number</label> <input id="phone"
-							class="form-control form-control-sm" type="text" th:field="*{phone}"
-							
-						/>
+						<label class="mb-0" for="birthDate">Birth date</label> <input id="birthDate" class="form-control form-control-sm" type="date" th:field="*{birthDate}" /> <label class="mb-0" for="email">Email</label> <input id="email" class="form-control form-control-sm" type="email" th:field="*{email}" /> <label class="mb-0" for="phone">Phone number</label> <input id="phone" class="form-control form-control-sm" type="text" th:field="*{phone}" />
 					</div>
 
 
@@ -57,37 +41,32 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<label class="mb-0" for="overview">Overview</label>
-						<textarea id="overview" class="form-control form-control-sm" type="text"
-							th:field="*{overview}" 
-						></textarea>
+						<textarea id="overview" class="form-control form-control-sm" type="text" th:field="*{overview}"></textarea>
 						<label class="mb-0" for="experience">Experience</label>
-						<textarea id="experience" class="form-control form-control-sm" type="text"
-							th:field="*{experience}" 
-						></textarea>
+						<textarea id="experience" class="form-control form-control-sm" type="text" th:field="*{experience}"></textarea>
 						<label class="mb-0" for="skill">Skills</label>
-						<textarea id="skill" class="form-control form-control-sm" type="text" th:field="*{skill}"
-							
-						></textarea>
+						<textarea id="skill" class="form-control form-control-sm" type="text" th:field="*{skill}"></textarea>
 						<label class="mb-0" for="education">Education</label>
-						<textarea id="education" class="form-control form-control-sm" type="text"
-							th:field="*{education}" 
-						></textarea>
+						<textarea id="education" class="form-control form-control-sm" type="text" th:field="*{education}"></textarea>
 						<label class="mb-0" for="interest">Interest</label>
-						<textarea id="interest" class="form-control form-control-sm" type="text"
-							th:field="*{interest}" 
-						></textarea>
+						<textarea id="interest" class="form-control form-control-sm" type="text" th:field="*{interest}"></textarea>
 
 						<button class="btn btn-info mt-3" type="submit">Submit</button>
 					</div>
-					
+
 				</div>
 			</form>
-			
-		<div class="row">
+
+			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group mt-4">
-						<h5>Photo </h5>
-						
+						<h5>Photo</h5>
+						<span>Only jpg/jpeg files are supported.</span> <a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
+		
+		<code>> Uploaded file type will is validated by checking content-type header value. Photo is cropped and resized by back-end logic in order to save sarver space.</code>"><i class="fa fa-terminal"></i></a>
+		
+		
+					</div>
 						<img class="img-fluid mb-2 img-thumbnail" th:src="|@{/img/user/}*{cv.id}.jpg|" />
 						<form method="POST" enctype="multipart/form-data" th:action="@{/uploadPhoto}">
 							<input type="hidden" name="cvId" th:value="*{cv.id}" />
@@ -96,9 +75,7 @@
 
 							<div class="input-group">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="theInputFile" name="photo"
-										aria-describedby="inputGroupFileAddon04"
-									> <label class="custom-file-label" for="theInputFile">Choose file</label>
+									<input type="file" accept=".jpg,.jpeg" class="custom-file-input" id="theInputFile" name="photo" aria-describedby="inputGroupFileAddon04"> <label class="custom-file-label" for="theInputFile">Choose file</label>
 								</div>
 								<br>
 								<div class="input-group-append">
@@ -106,16 +83,11 @@
 								</div>
 							</div>
 						</form>
-<a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
-		
-		<code>> Photo will be resized and cropped by back-end logic in order to save server space.</code>"
-		
-		><i class="fa fa-terminal"></i></a> 
-					</div>
+						
 				</div>
-			
+
 			</div>
-		
+
 		</div>
 	</div>
 

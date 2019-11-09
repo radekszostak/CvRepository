@@ -38,10 +38,9 @@ public class RegistrationController {
 	}	
 	
 	@GetMapping("/showRegistrationForm")
-	public String showMyLoginPage(Model theModel) {
+	public String showRegistrationForm(Model theModel) {
 		
 		theModel.addAttribute("crmUser", new CrmUser());
-		
 		return "registration-form";
 	}
 
@@ -53,7 +52,7 @@ public class RegistrationController {
 		
 		String userName = theCrmUser.getUserName();
 		logger.info("Processing registration form for: " + userName);
-		
+
 		// form validation
 		 if (theBindingResult.hasErrors()){
 			 return "registration-form";
