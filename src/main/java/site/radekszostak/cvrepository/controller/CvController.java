@@ -18,7 +18,7 @@ import site.radekszostak.cvrepository.service.UserService;
 
 
 @Controller
-public class DemoController {
+public class CvController {
 
 	@Autowired
 	private UserService userService;
@@ -26,51 +26,43 @@ public class DemoController {
 	@Autowired
 	private CvService cvService;
 
-	
-
+	//Main page - CV repository
 	@GetMapping("/")
 	public String showHome(Model theModel) {
 		List<Cv> theCvs = cvService.findAllPublic();
-		System.out.println("===> theCvs: " + theCvs);
 		theModel.addAttribute("cvs", theCvs);
 		return "browse";
 	}
 
+	//Searching for id of my CV and redirecting
 	@GetMapping("/viewMyCv")
 	public String viewMyCv(Model theModel, Principal thePrincipal) {
-		System.out.println("===> username: " + thePrincipal.getName());
 		User theUser = userService.findByUserName(thePrincipal.getName());
-
 		return "redirect:/showCv?id=" + theUser.getCv().getId();
 	}
 
+	//CV edition form
 	@GetMapping("/editMyCv")
 	public String editCv(Model theModel, Principal thePrincipal) {
-		System.out.println("===> username: " + thePrincipal.getName());
 		User theUser = userService.findByUserName(thePrincipal.getName());
-		System.out.println("===> User: " + theUser);
 		Cv theCv = theUser.getCv();
-		System.out.println("===> Cv: " + theCv);
 		theModel.addAttribute("cv", theCv);
 		return "cv-form";
 	}
 
+	//save CV to DB - just delegate to cvService
 	@PostMapping("/saveCv")
 	public String saveCv(@ModelAttribute("cv") Cv theCv, Model theModel) {
-
-		System.out.println("===> Cv is publish: " + theCv.isPublish());
 		cvService.save(theCv);
-		return "cv-form";
+		return "redirect:/editMyCv?cvSaved";
 	}
 
-
-
-	
-
+	//getting CV ID parameter from GET request. Then writing proper CV data to response
 	@GetMapping("/showCv")
 	public String showCv(@RequestParam("id") int cvId, Model theModel, Principal thePrincipal) {
 		theModel.addAttribute("cv", cvService.findById(cvId));
-		System.out.println("===> thePrincipal: " + thePrincipal);
+		//if user is logged in and he view his own CV, there will be available EDIT button.
+		//Below data is necessary for template to decide if show this button.
 		if (thePrincipal != null) {
 			User theUser = userService.findByUserName(thePrincipal.getName());
 			theModel.addAttribute("loggedUser", theUser);

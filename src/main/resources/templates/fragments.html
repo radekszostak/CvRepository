@@ -13,8 +13,6 @@
 <!-- Custom css -->
 <link rel="stylesheet" th:href="@{/css/filebrowse.css}">
 <link rel="stylesheet" th:href="@{/css/narrow.css}">
-<link rel="stylesheet" th:href="@{/css/termynal.css}">
-<link rel="stylesheet" th:href="@{/css/mytermynal.css}">
 <link rel="stylesheet" th:href="@{/css/customstyle.css}">
 </head>
 <body>
@@ -49,7 +47,6 @@
 			</div>
 		</nav>
 
-
 		<!-- Message bar -->
 		<div class="form-group">
 			<div class="col-xs-15">
@@ -64,19 +61,21 @@
 					<!-- Check for login error -->
 					<div th:if="${param.loginerror}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Invalid username and password.</div>
 					
-					<!-- Check for login error -->
+					<!-- Check for image upload success -->
 					<div th:if="${param.imageSuccess}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Image uploaded successfully.</div>
 					
-					<!-- Check for login error -->
+					<!-- Check for image type error -->
 					<div th:if="${param.imageTypeError}" class="alert alert-danger col-xs-offset-1 col-xs-10 mt-3">Uploaded file is not jpg/jpeg image.</div>
 					
+					<!-- Check for CV save success -->
+					<div th:if="${param.cvSaved}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Resume saved</div>
+					
+					<!-- Check for registration success -->
+					<div th:if="${param.registrationSuccess}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Registration successful. You can login now.</div>
 					
 				</div>
 			</div>
 		</div>
-
-
-
 	</header>
 
 	<!-- Footer -->
@@ -84,7 +83,7 @@
 
 
 		<div class="container mt-4 ">
-<hr class="mb-2">
+		<hr class="mb-2">
 			<div class="row">
 			
 				<div class="col-sm-6">

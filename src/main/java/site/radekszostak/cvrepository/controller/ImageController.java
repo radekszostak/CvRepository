@@ -25,23 +25,23 @@ public class ImageController {
 	@PostMapping("/uploadPhoto")
 	public String uploadPhoto(@RequestParam("cvId") String cvId, @RequestParam("photo") MultipartFile file,
 			HttpServletRequest request) {
-
+		//checking if not file jpg/jpeg
 		if (!(file.getContentType().toLowerCase().equals("image/jpg")
 				|| file.getContentType().toLowerCase().equals("image/jpeg"))) {
 			return "redirect:/editMyCv?imageTypeError";
 		} else {
-
-			System.out.println("===> cvId: " + cvId);
+			//file extension check OK - save the file
 			try {
 				photoService.store(file.getBytes(), cvId.concat(".jpg"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			return "redirect:/editMyCv?imageSuccess";
 		}
 	}
-
+	
+	//if user provide path /img/user/{cvId}.jpg server will get file from directory specified
+	//in application.properties and send it as response
 	@GetMapping(value = "/img/user/{filename:.+}", produces = MediaType.IMAGE_JPEG_VALUE)
 	@ResponseBody
 	public byte[] serveFile(@PathVariable String filename) {

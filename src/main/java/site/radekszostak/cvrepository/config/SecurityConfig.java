@@ -20,7 +20,7 @@ import site.radekszostak.cvrepository.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// add a reference to our security data source
 	@Autowired
@@ -56,19 +56,16 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	}
 
-	// beans
-	// bcrypt bean definition
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	// authenticationProvider bean definition
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-		auth.setUserDetailsService(userService); // set the custom user details service
-		auth.setPasswordEncoder(passwordEncoder()); // set the password encoder - bcrypt
+		auth.setUserDetailsService(userService);
+		auth.setPasswordEncoder(passwordEncoder());//set BCrypt encryption
 		return auth;
 	}
 

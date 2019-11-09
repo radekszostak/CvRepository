@@ -17,11 +17,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User findByUserName(String theUserName) {
-		
-		// get the current hibernate session
-		Session currentSession = entityManager.unwrap(Session.class);
 
-		// now retrieve/read from database using username
+		Session currentSession = entityManager.unwrap(Session.class);
 		Query<User> theQuery = currentSession.createQuery("from User where username=:uName", User.class);
 		theQuery.setParameter("uName", theUserName);
 		User theUser = null;
@@ -36,10 +33,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void save(User theUser) {
-		// get current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
-
-		// create the user ... finally LOL
 		currentSession.saveOrUpdate(theUser);
 	}
 

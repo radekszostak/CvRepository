@@ -25,11 +25,9 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Value("${storage.userphotos}")
 	private String storageLocation;
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-	}
+	
+	@Value("${storage.defaultPhotoName}")
+	private String defaultPhotoName;
 
 	@Override
 	public void store(byte[] bytes, String name) throws Exception {
@@ -38,7 +36,7 @@ public class PhotoServiceImpl implements PhotoService {
 
 		int height = image.getHeight();
 		int width = image.getWidth();
-
+		//Crop image to square
 		if (height != width) {
 			int x, y, w, h;
 			if (height > width) {
@@ -54,6 +52,7 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 			image = image.getSubimage(x, y, w, h);
 		}
+		//if image after crop has size bigger that 500px: scale to 500px.
 		int squareSize = Math.min(image.getWidth(), image.getHeight());
 		int targetSize = 500;
 		if (squareSize > targetSize) {
@@ -69,6 +68,7 @@ public class PhotoServiceImpl implements PhotoService {
 			
 			image = resizedImage;
 		}
+		//Save the file in directory provided in application.properties
 		Path path = Paths.get(storageLocation, name);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(image, "jpg", baos);
@@ -76,34 +76,28 @@ public class PhotoServiceImpl implements PhotoService {
 
 	}
 
-	@Override
-	public Stream<Path> loadAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	//Return photo byte array by name. Function search for file in location provided in application.properties
 	@Override
 	public byte[] load(String filename) {
-		Path path = Paths.get(storageLocation, filename);
+		
 		byte[] file;
 		try {
-			file = Files.readAllBytes(path);
+			file = Files.readAllBytes(Paths.get(storageLocation, filename));
+			if(file == null) {
+				
+			}
 		} catch (IOException e) {
-			file = null;
+			//file probably not exist - get default photo
+			try {
+				file = Files.readAllBytes(Paths.get(storageLocation, defaultPhotoName));
+			} catch (IOException ex){
+				//problem unknown
+				file = null;
+			}
 		}
 		return file;
 	}
 
-	@Override
-	public Resource loadAsResource(String filename) {
 
-		return null;
-	}
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-
-	}
 
 }

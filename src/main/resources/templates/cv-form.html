@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
+<!-- Insertion from fragments.html -->
 <head th:include="fragments :: head"></head>
 
 <body>
 	<div class="container">
-
+		<!-- Insertion from fragments.html -->
 		<div th:insert="fragments :: header"></div>
-
-
-
 		<div class="container border shadow px-md-5 py-4">
 
 			<form th:action="@{/saveCv}" th:object="${cv}" method="POST">
 				<input type="hidden" th:field="*{id}" />
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="form-group">
@@ -62,17 +58,11 @@
 					<div class="form-group mt-4">
 						<h5>Photo</h5>
 						<span>Only jpg/jpeg files are supported.</span> <a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
-		
-		<code>> Uploaded file type is validated by checking content-type header value. Photo is cropped and resized by back-end logic in order to save sarver space.</code>"><i class="fa fa-terminal"></i></a>
-		
-		
+						<code>> Uploaded file type is validated by checking content-type header value. Photo is cropped and resized by back-end logic in order to save sarver space.</code>"><i class="fa fa-terminal"></i></a>
 					</div>
 						<img class="img-fluid mb-2 img-thumbnail" th:src="|@{/img/user/}*{cv.id}.jpg|" />
 						<form method="POST" enctype="multipart/form-data" th:action="@{/uploadPhoto}">
 							<input type="hidden" name="cvId" th:value="*{cv.id}" />
-
-
-
 							<div class="input-group">
 								<div class="custom-file">
 									<input type="file" accept=".jpg,.jpeg" class="custom-file-input" id="theInputFile" name="photo" aria-describedby="inputGroupFileAddon04"> <label class="custom-file-label" for="theInputFile">Choose file</label>
@@ -83,16 +73,17 @@
 								</div>
 							</div>
 						</form>
-						
 				</div>
-
 			</div>
-
 		</div>
 	</div>
-
+	
+	<!-- Insertion from fragments.html -->
 	<footer th:include="fragments :: footer"></footer>
-
+	
+	<!-- Fakepath issue from file input
+	https://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath
+	 -->
 	<script>
 		$('#theInputFile').on('change', function() {
 

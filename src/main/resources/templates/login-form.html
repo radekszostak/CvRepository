@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-
+<!-- Insertion from fragments.html -->
 <head th:include="fragments :: head"></head>
 
 
 <body>
 
 	<div class="container">
+		<!-- Insertion from fragments.html -->
 		<div th:insert="fragments :: header"></div>
 		<div class="container border shadow px-sm-5 pb-4 pt-3">
 		<a href="#!" class="badge badge-dark pulse" data-toggle="tooltip" data-html="true" title="
 		
-		<code>> User authentication and access control is handled by Spring Security framework.</code>"
+		<code>> User authentication and access control is handled by Spring Security framework. Paswords are encrypted and stored in DB.</code>"
 		
 		><i class="fa fa-terminal"></i></a> 
 			<div class="row pt-3">
@@ -20,30 +21,18 @@
 				<h4>Login</h4>
 					<!-- Login Form -->
 					<form th:action="@{/authenticateTheUser}" method="POST" class="form-horizontal">
-
 						<!-- User name -->
-
 						<label class="mb-0" for="username">Username</label> <input type="text" name="username"
 							class="form-control form-control-sm"
 						>
-
-
 						<!-- Password -->
-
 						<label class="mb-0" for="password">Password</label> <input type="password" name="password"
 							class="form-control form-control-sm"
 						>
-
-
 						<!-- Login/Submit Button -->
-
 						<button type="submit" class="btn btn-info my-3 btn-sm">Login</button>
-
-
 					</form>
-					
 				</div>
-				
 				<div class="col-sm-6 pl-sm-5">
 						<h4>Sign up</h4>
 						<div class="pt-sm-4">Don't have account?</div>
@@ -55,7 +44,7 @@
 		</div>
 	</div>
 
-
+	<!-- Insertion from fragments.html -->
 	<footer th:include="fragments :: footer"></footer>
 </body>
 </html>

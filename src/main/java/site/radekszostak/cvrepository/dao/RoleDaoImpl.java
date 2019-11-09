@@ -17,11 +17,7 @@ public class RoleDaoImpl implements RoleDao {
 
 	@Override
 	public Role findRoleByName(String theRoleName) {
-
-		// get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
-
-		// now retrieve/read from database using name
 		Query<Role> theQuery = currentSession.createQuery("from Role where name=:roleName", Role.class);
 		theQuery.setParameter("roleName", theRoleName);
 		

@@ -16,15 +16,15 @@ public class CvServiceImpl implements CvService {
 	private CvDao cvDao;
 	
 	@Override
-	public List<Cv> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<Cv> findAllPublic() {
+		return cvDao.findAllPublic();
 	}
 
 	@Override
-	public Cv findByUserId(int theId) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Cv findById(int cvId) {
+		return cvDao.findById(cvId);
 	}
 
 	@Override
@@ -33,23 +33,4 @@ public class CvServiceImpl implements CvService {
 		cvDao.save(theCv);
 
 	}
-
-	@Override
-	public void deleteById(int theId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Cv> findAllPublic() {
-		return cvDao.findAllPublic();
-		
-	}
-
-	@Override
-	public Cv findById(int cvId) {
-		
-		return cvDao.findById(cvId);
-	}
-
 }

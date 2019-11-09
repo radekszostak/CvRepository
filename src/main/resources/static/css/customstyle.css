@@ -1,3 +1,4 @@
+/*Tooltip styles*/
 code {
 	color: white;
 	text-align: left;
@@ -8,9 +9,6 @@ code {
 }
 
 .pulse {
-  
-  
-  
   
   cursor: pointer;
   box-shadow: 0 0 0 rgba(69, 69, 69, 0.4);

@@ -72,9 +72,8 @@ public class RegistrationController {
       
         userService.save(theCrmUser);
         
-        
         logger.info("Successfully created user: " + userName);
         
-        return "registration-confirmation";		
+        return "redirect:/?registrationSuccess";		
 	}
 }
