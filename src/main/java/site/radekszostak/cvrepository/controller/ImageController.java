@@ -1,5 +1,7 @@
 package site.radekszostak.cvrepository.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,7 +26,7 @@ public class ImageController {
 
 	@PostMapping("/uploadPhoto")
 	public String uploadPhoto(@RequestParam("cvId") String cvId, @RequestParam("photo") MultipartFile file,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws IOException {
 		//checking if not file jpg/jpeg
 		if (!(file.getContentType().toLowerCase().equals("image/jpg")
 				|| file.getContentType().toLowerCase().equals("image/jpeg"))) {

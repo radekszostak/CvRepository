@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/showCv").permitAll()
 			.antMatchers("/css/*").permitAll()
 			.antMatchers("/script/*").permitAll()
+			.antMatchers("/error").permitAll()
 			.antMatchers("/**").hasRole("USER")
 			.and()
 			.formLogin().loginPage("/login").loginProcessingUrl("/authenticateTheUser")

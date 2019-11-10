@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Insertion from fragments.html -->
+<head th:include="fragments :: head"></head>
+
+
+<body>
+
+	<div class="container">
+		<!-- Insertion from fragments.html -->
+		<div th:insert="fragments :: header"></div>
+		<div class="container">
+			<div class="row py-5">
+				
+				<div class="col-sm-6">
+					<h4 class="pb-1">We have a problem...</h4>
+					<!-- If error is handled print custom message (text variable) -->
+					<span th:text="*{text} ? *{text} : 'Page cannot be loaded.'"></span>
+				</div>
+				<div class="col-sm-6">
+				<a role="button" class="btn btn-info mt-4" th:href="@{/}">Go to Main Page</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<!-- Insertion from fragments.html -->
+	<footer th:include="fragments :: footer"></footer>
+	<!-- Hide messages bar -->
+	<script>
+		$("#message").hide();
+	</script>
+</body>
+</html>
