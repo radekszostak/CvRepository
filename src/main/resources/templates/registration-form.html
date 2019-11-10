@@ -32,9 +32,8 @@
 					    </div>
 
 						<!-- User name -->
-						
 							<label class="mb-0" for="username">Username</label> 
-							<input type="text" th:field="*{userName}" id="username" class="form-control" />
+							<input type="text" th:field="*{userName}" id="username" class="form-control form-control-sm" />
 						
 
 						<div th:if="${#fields.hasErrors('userName')}"
@@ -48,7 +47,7 @@
 						<!-- Password -->
 						
 							<label class="mb-0" for="username">Password</label>
-							<input type="password" th:field="*{password}" id="password" class="form-control" th:errorclass="fieldError" />
+							<input type="password" th:field="*{password}" id="password" class="form-control form-control-sm" th:errorclass="fieldError" />
 						
 						<div th:if="${#fields.hasErrors('password')}"
 							style="margin-bottom: 25px" class="text-danger">
@@ -60,7 +59,7 @@
 						<!-- Confirm Password -->
 						
 							<label class="mb-0" for="matchingPassword">Confirm password</label>
-							<input type="password" th:field="*{matchingPassword}" id="matchingPassword" class="form-control" th:errorclass="fieldError" />
+							<input type="password" th:field="*{matchingPassword}" id="matchingPassword" class="form-control form-control-sm" th:errorclass="fieldError" />
 						
 						<div th:if="${#fields.hasErrors('matchingPassword')}"
 							style="margin-bottom: 25px" class="text-danger">
@@ -72,7 +71,7 @@
 						<!-- Email -->
 						
 							<label class="mb-0" for="email">Email</label>
-							<input type="text" th:field="*{email}" id="email" class="form-control" th:errorclass="fieldError" />
+							<input type="text" th:field="*{email}" id="email" class="form-control form-control-sm" th:errorclass="fieldError" />
 						
 						<div th:if="${#fields.hasErrors('email')}"
 							style="margin-bottom: 25px" class="text-danger">
@@ -80,10 +79,8 @@
 							  <li th:each="err : ${#fields.errors('email')}" th:text="'Email ' + ${err}" />
 							</ul>						
 						</div>
-						
 						<!-- Register Button -->
-								<button type="submit" class="btn btn-info mt-3">Sign up</button>			
-						
+								<button type="submit" class="btn btn-info btn-sm mt-3">Sign up</button>			
 					</form>
 				</div>
 			</div>
