@@ -16,3 +16,7 @@ Deployed website is available at http://185.81.166.249:8080/cvrepository. Feel f
 
 ## Author
 **Radosław Szostak** - [shocik](https://github.com/shocik)
+Also used solutions from:
+*[Spring and Hibernate](https://www.udemy.com/course/spring-hibernate-tutorial/) - Udemy tutorial created by Chad Darby
+*[Baeldung.com](https://www.baeldung.com/) - Spring guides
+*[Stack Overflow](https://stackoverflow.com/)
