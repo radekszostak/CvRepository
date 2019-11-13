@@ -2,7 +2,7 @@
 Dynamic website for publishing resume.
 
 ## Try out
-Deployed website is available at http://185.81.166.249:8080/cvrepository. Feel free to visit the website and check out all of its functions.
+Deployed website is available at http://185.81.166.249:8080/cvrepository. Feel free to visit and check out all of its functions.
 
 ## Built With
 * [Spring](https://spring.io/) - The web framework used
