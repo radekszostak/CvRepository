@@ -1,5 +1,5 @@
 # CvRepository
-Dynamic website for publishing cv.
+Dynamic website for publishing resume.
 
 ## Try out
 Deployed website is available at http://185.81.166.249:8080/cvrepository. Feel free to visit the website and check all of its functions.
