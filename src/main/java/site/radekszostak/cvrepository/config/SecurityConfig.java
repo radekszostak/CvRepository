@@ -82,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		public void commence(HttpServletRequest request, HttpServletResponse response,
 				AuthenticationException authException) throws IOException {
 			
-				response.sendRedirect("/login?accessdenied");
+				response.sendRedirect(request.getContextPath() + "/login?accessdenied");
 			
 		}
 

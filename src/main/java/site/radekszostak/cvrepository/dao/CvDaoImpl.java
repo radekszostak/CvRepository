@@ -1,6 +1,7 @@
 package site.radekszostak.cvrepository.dao;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.persistence.EntityManager;
 
@@ -20,6 +21,7 @@ public class CvDaoImpl implements CvDao {
 	@Override
 	public void save(Cv theCv) {
 		Session currentSession = entityManager.unwrap(Session.class);
+	
 		currentSession.saveOrUpdate(theCv);
 	}
 
