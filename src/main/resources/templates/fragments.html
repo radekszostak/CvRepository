@@ -17,16 +17,12 @@
 </head>
 <body>
 	<header th:fragment="header">
-	
+
 		<!-- Authentication bar -->
-		<span class="float-right">
-		
-		<span sec:authorize="isAuthenticated()">
-		
-		Logged in as <span sec:authentication="name"></span> | <a href="javascript: document.logoutForm.submit()" role="menuitem" class="text-info"> Logout</a>
-			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-				<input hidden="true" type="submit" value="Sign Out" />
-			</form>
+		<span class="float-right"> <span sec:authorize="isAuthenticated()"> Logged in as <span sec:authentication="name"></span> | <a href="javascript: document.logoutForm.submit()" role="menuitem" class="text-info"> Logout</a>
+				<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+					<input hidden="true" type="submit" value="Sign Out" />
+				</form>
 		</span> <span sec:authorize="isAnonymous()"> Not logged in | <a class="text-info" th:href="@{/login}">Login</a> | <a class="text-info" th:href="@{/register/showRegistrationForm}">Sign up</a>
 		</span></span> <br>
 
@@ -60,19 +56,19 @@
 
 					<!-- Check for login error -->
 					<div th:if="${param.loginerror}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Invalid username and password.</div>
-					
+
 					<!-- Check for image upload success -->
 					<div th:if="${param.imageSuccess}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Image successfully uploaded.</div>
-					
+
 					<!-- Check for image type error -->
 					<div th:if="${param.imageTypeError}" class="alert alert-danger col-xs-offset-1 col-xs-10 mt-3">Uploaded file is not jpg/jpeg image.</div>
-					
+
 					<!-- Check for CV save success -->
 					<div th:if="${param.cvSaved}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Resume successfully saved.</div>
-					
+
 					<!-- Check for registration success -->
 					<div th:if="${param.registrationSuccess}" class="alert alert-info col-xs-offset-1 col-xs-10 mt-3">Registration successful. You can login now.</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -83,18 +79,18 @@
 
 
 		<div class="container mt-4 ">
-		<hr class="mb-2">
+			<hr class="mb-2">
 			<div class="row">
-			
+
 				<div class="col-sm-6">
-				
+
 					<h5>Source</h5>
 					<ul class="list-unstyled">
 						<li><i class="fa fa-github-square"></i> Web page sources available on <a class="text-info" href="https://github.com/shocik/CvRepository">GitHub</a></li>
 					</ul>
-				 </div>
+				</div>
 				<div class="col-sm-6">
-					
+
 					<h5>Contact</h5>
 					<ul class="list-unstyled">
 						<li><i class="fa fa-linkedin-square"></i> <a class="text-info" href="https://www.linkedin.com/in/rados%C5%82aw-szostak/">Radosław Szostak</a></li>
@@ -105,10 +101,28 @@
 			</div>
 		</div>
 
+		<!-- Modal -->
+		<div th:if="${param.hello}" class="modal fade" id="helloModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Welcome on my website!</h5>
+					</div>
+					<div class="modal-body">
+						<p class="text-justify">Go ahead and create an account to discover all functions of the website.
+							Look around for  <span class="badge badge-dark"><i class="fa fa-terminal"></i></span>  icons containing back-end notes to see what's hiding under the hood. Will you manage to find them&nbsp;all?&nbsp;;-)</p> 
+		 				<p class="text-right mr-3">Have a nice day,<br><img class="mt-2" th:src="@{/img/content/signature.png}" style="width:150px"><br></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal">Continue</button>
 
-
-
+					</div>
+				</div>
+			</div>
+		</div>
 		
+
+
 		<!-- Bootstrap scripts -->
 
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -119,6 +133,8 @@
 			$(function() {
 				$('[data-toggle="tooltip"]').tooltip()
 			})
+			
+			$('#helloModal').modal('show')
 		</script>
 
 
